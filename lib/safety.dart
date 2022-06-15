@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:safetynet_attestation/models/jws_payload_model.dart';
 import 'package:safetynet_attestation/safetynet_attestation.dart';
+import 'package:safetynet_attestation/safetynet_attestation_platform_interface.dart';
 
 class MySafeApp extends StatefulWidget {
   const MySafeApp({Key? key}) : super(key: key);
