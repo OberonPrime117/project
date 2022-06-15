@@ -28,7 +28,7 @@ class _MyAppState extends State<MyApp> {
     GooglePlayServicesAvailability? gmsAvailability;
     try {
       gmsAvailability =
-      await SafetynetAttestation.googlePlayServicesAvailability();
+      await SafetynetAttestation().googlePlayServicesAvailability();
     } on PlatformException {
       gmsAvailability = null;
     }
@@ -102,7 +102,7 @@ class _SafetyNetAttestationWidgetState
   void requestSafetyNetAttestation() async {
     String dialogTitle, dialogMessage;
     try {
-      JWSPayloadModel res = await SafetynetAttestation.safetyNetAttestationPayload('AIzaSyBBa7zdGwLbr4Qk4i0_Tfwd2ihVLwPtVio');
+      JWSPayloadModel res = await SafetynetAttestation().safetyNetAttestationPayload('AIzaSyBBa7zdGwLbr4Qk4i0_Tfwd2ihVLwPtVio');
 
       dialogTitle = 'SafetyNet Attestation Payload';
       dialogMessage = res.toString();
