@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'BlockList.dart';
 import 'Data.dart';
-import 'nope.dart';
 import 'npvpn.dart';
 
 void main() => runApp(MyHomeApp());
@@ -65,7 +64,7 @@ class MyHomeApp extends StatelessWidget {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => MyApp()),
+                    MaterialPageRoute(builder: (context) => novpn()),
                   );
                 },
               ),
