@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "810788481921",
+    "project_id": "dedsec-d1ee5",
+    "storage_bucket": "dedsec-d1ee5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:810788481921:android:f1e191142bccec9e21d680",
+        "android_client_info": {
+          "package_name": "com.example.project"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "810788481921-acud2js4mlb4cpasm32sg7883akncb8e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCuvPXP2SCpkNxviSfzk6n2yfc0rrbNtRw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "810788481921-acud2js4mlb4cpasm32sg7883akncb8e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
