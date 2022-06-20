@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:project/review.dart';
 import 'package:project/verify.dart';
-import 'package:safetynet_attestation/safetynet_attestation_platform_interface.dart';
 import 'BlockList.dart';
 import 'Data.dart';
 import 'HomePage.dart';
@@ -36,7 +35,7 @@ class _novpnState extends State<novpn> {
     GooglePlayServicesAvailability? gmsAvailability;
     try {
       gmsAvailability =
-          await SafetynetAttestation().googlePlayServicesAvailability();
+          await SafetynetAttestation.googlePlayServicesAvailability();
     } on PlatformException {
       gmsAvailability = null;
     }
@@ -239,7 +238,7 @@ class _novpnState extends State<novpn> {
     String dialogTitle, dialogMessage;
     try {
       JWSPayloadModel res =
-          await SafetynetAttestation().safetyNetAttestationPayload(
+          await SafetynetAttestation.safetyNetAttestationPayload(
               'AIzaSyCfqMjfOUSBjx6H1XFNCQdN0EypSStLIfs');
 
       dialogTitle = 'SafetyNet Attestation Payload';

@@ -14,13 +14,13 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_vpn:
-  
   flutter_jailbreak_detection:
   safetynet_attestation:
   http: 
   bloc_pattern:
   rxdart:
   google_fonts:
+  flutter_openvpn:
   dio:
 
 
@@ -39,8 +39,8 @@ dev_dependencies:
 
 # The following section is specific to Flutter packages.
 flutter:
-  #assets:
-  #  - assets/tick.gif
+  assets:
+    - assets/tick.gif
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in

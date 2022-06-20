@@ -5,14 +5,16 @@ import 'package:flutter/services.dart';
 import 'package:safetynet_attestation/models/jws_payload_model.dart';
 import 'package:safetynet_attestation/safetynet_attestation.dart';
 
-class MySafeApp extends StatefulWidget {
-  const MySafeApp({Key? key}) : super(key: key);
+void main() => runApp(const MyApp());
+
+class MyApp extends StatefulWidget {
+  const MyApp({Key? key}) : super(key: key);
 
   @override
-  _MySafeAppState createState() => _MySafeAppState();
+  State<MyApp> createState() => _MyAppState();
 }
 
-class _MySafeAppState extends State<MySafeApp> {
+class _MyAppState extends State<MyApp> {
   GooglePlayServicesAvailability? _gmsStatus;
 
   @override
@@ -25,7 +27,7 @@ class _MySafeAppState extends State<MySafeApp> {
     GooglePlayServicesAvailability? gmsAvailability;
     try {
       gmsAvailability =
-          await SafetynetAttestation.googlePlayServicesAvailability();
+      await SafetynetAttestation.googlePlayServicesAvailability();
     } on PlatformException {
       gmsAvailability = null;
     }
@@ -99,9 +101,7 @@ class _SafetyNetAttestationWidgetState
   void requestSafetyNetAttestation() async {
     String dialogTitle, dialogMessage;
     try {
-      JWSPayloadModel res =
-          await SafetynetAttestation.safetyNetAttestationPayload(
-              'AIzaSyCfqMjfOUSBjx6H1XFNCQdN0EypSStLIfs');
+      JWSPayloadModel res = await SafetynetAttestation.safetyNetAttestationPayload('AIzaSyBBa7zdGwLbr4Qk4i0_Tfwd2ihVLwPtVio');
 
       dialogTitle = 'SafetyNet Attestation Payload';
       dialogMessage = res.toString();
@@ -134,5 +134,4 @@ class _SafetyNetAttestationWidgetState
     setState(() {
       isLoading = false;
     });
-  }
-}
+  }}
