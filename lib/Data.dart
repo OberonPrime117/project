@@ -10,7 +10,7 @@ import 'BlockList.dart';
 
 class Data extends StatefulWidget {
   @override
-  _DataState createState() => new _DataState();
+  _DataState createState() => _DataState();
 }
 
 class _DataState extends State<Data> {
@@ -31,7 +31,6 @@ class _DataState extends State<Data> {
   Widget myWidget(BuildContext context) {
     return Column(
       children: [
-           
         const Text(
           "VirusTotal has searched the database and found that the website entered is ",
           style: TextStyle(
@@ -40,50 +39,32 @@ class _DataState extends State<Data> {
           textAlign: TextAlign.center,
         ),
         const Padding(padding: EdgeInsets.fromLTRB(0, 20, 0, 0)),
-        if (bval > 0)
-          if (pressed == 2)
-            const Text(" MALICIOUS ", style: TextStyle(fontSize: 24)),
+        if (bval > 0) const Text(" MALICIOUS ", style: TextStyle(fontSize: 24)),
         if (bval == 0.0) const Text("<EMPTY>", style: TextStyle(fontSize: 24)),
-        if (bval <= 0)
-          if (pressed == 2)
-            const Text("TOTALLY SAFE TO USE ",
-                style: TextStyle(fontSize: 24)),
+        if (bval < 0)
+          const Text("TOTALLY SAFE TO USE ", style: TextStyle(fontSize: 24)),
         const Padding(padding: EdgeInsets.fromLTRB(0, 20, 0, 0)),
         Row(children: [
           const Padding(padding: EdgeInsets.fromLTRB(70, 0, 0, 0)),
           Image.asset('assets/virustotal.png', width: 50, height: 50),
           if (bval > 0)
-            if (pressed == 2)
-              Text("  rating is $bval.",
-                  style: const TextStyle(
-                    fontSize: 19,
-                  )),
-          if (bval <= 0)
-            if (pressed == 2)
-              Text("  rating is $bval.",
-                  style: const TextStyle(
-                    fontSize: 19,
-                  )),
-          
+            Text("  rating is $bval.",
+                style: const TextStyle(
+                  fontSize: 19,
+                )),
+          if (bval < 0)
+            Text("  rating is $bval.",
+                style: const TextStyle(
+                  fontSize: 19,
+                )),
           if (bval == 0.0)
-              const Text("  rating will be visible here",
-                  style: TextStyle(
-                    fontSize: 19,
-                  )),
+            const Text("  rating will be visible here",
+                style: TextStyle(
+                  fontSize: 19,
+                )),
         ]),
       ],
     );
-  }
-
-  Future<void> myfunc() async {
-    String val = _controller.text;
-    final response =
-        await http.get(Uri.parse("http://10.0.2.2:5000/verify?Query=$val"));
-    String jsonsDataString = response.body;
-    final datab = jsonDecode(jsonsDataString);
-    bval = datab["Query"];
-    print(bval);
-    
   }
 
   @override
@@ -95,68 +76,73 @@ class _DataState extends State<Data> {
         foregroundColor: (Colors.red),
         centerTitle: true,
       ),
-      body: SingleChildScrollView(child:Padding(
-          padding: const EdgeInsets.all(15),
-          child: Column(
-            children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.all(15),
-                child: TextField(
-                  controller: _controller,
-                  decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: 'Search',
-                    hintText:
-                        'Enter the URL/IP in format of xxx.com/xxx.org/xxx.io',
+      body: SingleChildScrollView(
+          child: Padding(
+              padding: const EdgeInsets.all(15),
+              child: Column(
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.all(15),
+                    child: TextField(
+                      controller: _controller,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: 'Search',
+                        hintText:
+                            'Enter the URL/IP in format of xxx.com/xxx.org/xxx.io',
+                      ),
+                    ),
                   ),
-                ),
-              ),
-              ElevatedButton(
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all<Color>(Colors.red),
-                ),
-                child: const Text("Search"),
-                onPressed: () async {
-                  setState(() {
-                    myfunc();
-                    pressed = pressed + 1;
-                  });
+                  ElevatedButton(
+                    style: ButtonStyle(
+                      backgroundColor:
+                          MaterialStateProperty.all<Color>(Colors.red),
+                    ),
+                    child: const Text("Search"),
+                    onPressed: () async {
+                      String val = _controller.text;
+                      final response = await http.get(Uri.parse("http://10.0.2.2:5000/verify?Query=$val"));
+                      setState(() {
+                        String jsonsDataString = response.body;
+                        final datab = jsonDecode(jsonsDataString);
+                        bval = datab["Query"];
+                      });
+                    },
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.fromLTRB(0, 30, 0, 0), //Container
+                  ),
+                  ElevatedButton(
+                      onPressed: () {
+                        showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                title: const Text("Instructions for User"),
+                                content: const Text(
+                                    "User can enter the domain URL of the website after which we will search the VirusTotal database by using their API for reports. VirusTotal report will let us know whether the domain is malicious or not.",
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                    )),
+                                actions: <Widget>[
+                                  TextButton(
+                                    child: const Text('Close'),
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                  ),
+                                ],
+                              );
+                            });
+                      },
+                      child: const Text("Instructions")),
+                  const Padding(
+                    padding: EdgeInsets.fromLTRB(0, 30, 0, 0), //Container
+                  ),
                   
-                },
-              ),
-              const Padding(
-                padding: EdgeInsets.fromLTRB(0, 30, 0, 0), //Container
-              ),
-              ElevatedButton(
-                  onPressed: () async {
-                    showDialog(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return AlertDialog(
-                            title: Text("Instructions for User"),
-                            content: const Text(
-                                "User can enter the domain URL of the website after which we will search the VirusTotal database by using their API for reports. VirusTotal report will let us know whether the domain is malicious or not.",
-                                style: TextStyle(
-                                  fontSize: 20,
-                                )),
-                            actions: <Widget>[
-                              TextButton(
-                                child: Text('Close'),
-                                onPressed: () {
-                                  Navigator.of(context).pop();
-                                },
-                              ),
-                            ],
-                          );
-                        });
-                  },
-                  child: const Text("Instructions")),
-              const Padding(
-                padding: EdgeInsets.fromLTRB(0, 30, 0, 0), //Container
-              ),
-              myWidget(context)
-            ],
-          ))),
+                  myWidget(context)
+                ],
+              ))),
       drawer: Drawer(
         child: ListView(
           padding: EdgeInsets.zero,
@@ -173,7 +159,7 @@ class _DataState extends State<Data> {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => MyHomeApp()),
+                  MaterialPageRoute(builder: (context) => const MyHomeApp()),
                 );
               },
             ),
