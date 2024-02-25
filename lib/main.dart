@@ -2,10 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:project/HomePage.dart';
 import 'package:project/Data.dart';
 import 'package:project/verify.dart';
-import 'home.dart';
-import 'npvpn.dart';
 import 'package:project/Data.dart';
-import 'safety.dart';
 
 void main() {
   runApp(const MyApp());

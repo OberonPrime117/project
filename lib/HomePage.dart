@@ -4,9 +4,7 @@ import 'package:project/verify.dart';
 import 'BlockList.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'BlockList.dart';
 import 'Data.dart';
-import 'nope.dart';
 import 'npvpn.dart';
 
 void main() => runApp(MyHomeApp());
